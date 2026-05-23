@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Polar Bear 🐻‍❄️</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+:root{
+--gold:#d4af37;
+--rose:#e8b4b8;
+--dark:#0a0a0a;
+--overlay:rgba(0,0,0,0.75);
+}
+
+body{
+overflow:hidden;
+background:var(--dark);
+color:white;
+font-family:'Cormorant Garamond',serif;
+}
+
+::-webkit-scrollbar{display:none;}
+
+.blackbox{
+position:fixed;
+inset:20px;
+background:linear-gradient(145deg, #0d0d0d, #050505);
+border:1px solid #1a1a1a;
+border-radius:30px;
+box-shadow:0 40px 80px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.05);
+z-index:1000;
+display:flex;
+justify-content:center;
+align-items:center;
+transition:all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blackbox.open{
+opacity:1;
+pointer-events:all;
+}
+
+.page{
+position:absolute;
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:30px;
+transition:all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+background-size:cover;
+background-position:center;
+transform:scale(1);
+opacity:1;
+}
+
+.page.hidden{
+transform:scale(0.85) translateY(50px);
+opacity:0;
+pointer-events:none;
+}
+
+.overlay{
+position:absolute;
+inset:0;
+background:var(--overlay);
+border-radius:30px;
+}
+
+.content{
+position:relative;
+z-index:2;
+max-width:620px;
+animation:emerge 1.8s ease forwards;
+opacity:0;
+}
+
+@keyframes emerge{
+from{opacity:0;transform:translateY(60px) scale(0.95);}
+to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+@keyframes floaty{
+0%,100%{transform:translateY(0) rotate(-3deg);}
+50%{transform:translateY(-15px) rotate(3deg);}
+}
+
+.emoji{
+font-size:70px;
+animation:floaty 4s ease-in-out infinite;
+filter:drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+}
+
+h1{
+font-family:'Playfair Display',serif;
+font-size:44px;
+font-weight:400;
+margin-bottom:25px;
+letter-spacing:3px;
+text-transform:uppercase;
+background:linear-gradient(90deg, #fff, var(--gold), #fff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+background-size:200% auto;
+animation:shine 4s linear infinite;
+}
+
+@keyframes shine{
+to{background-position:200% center;}
+}
+
+.message{
+font-size:20px;
+line-height:2;
+margin-bottom:30px;
+color:rgba(255,255,255,0.88);
+font-weight:300;
+letter-spacing:0.5px;
+}
+
+.btn-group{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:15px;}
+
+.btn{
+padding:16px 40px;
+border:1px solid rgba(212,175,55,0.3);
+border-radius:50px;
+font-size:14px;
+letter-spacing:2px;
+text-transform:uppercase;
+cursor:pointer;
+background:linear-gradient(135deg, rgba(212,175,55,0.1), rgba(0,0,0,0.3));
+color:white;
+transition:all 0.5s ease;
+font-family:'Cormorant Garamond',serif;
+}
+
+.btn:hover{
+border-color:var(--gold);
+transform:translateY(-4px);
+box-shadow:0 20px 40px rgba(212,175,55,0.2);
+}
+
+.gold-badge{
+background:linear-gradient(135deg, var(--gold), #f0d875, var(--gold));
+background-size:200% 200%;
+animation:shimmer 2s ease infinite;
+color:#000;
+padding:10px 25px;
+border-radius:25px;
+font-size:11px;
+font-weight:600;
+letter-spacing:2px;
+text-transform:uppercase;
+box-shadow:0 10px 30px rgba(212,175,55,0.4);
+margin-bottom:20px;
+}
+
+@keyframes shimmer{
+0%,100%{background-position:0% 50%}
+50%{background-position:100% 50%}
+}
+
+.gallery{
+display:flex;
+justify-content:center;
+gap:12px;
+flex-wrap:wrap;
+margin:20px 0;
+}
+
+.img-frame{
+width:200px;
+height:130px;
+border-radius:12px;
+object-fit:cover;
+box-shadow:0 20px 50px rgba(0,0,0,0.6);
+transition:all 0.5s ease;
+border:2px solid rgba(255,255,255,0.1);
+}
+
+.img-frame:hover{
+transform:scale(1.08) rotate(2deg);
+border-color:var(--gold);
+}
+
+.lily-img{width:140px;height:100px;}
+
+.final-text{
+font-family:'Playfair Display',serif;
+font-size:22px;
+font-style:italic;
+line-height:2.2;
+color:var(--rose);
+text-shadow:0 0 40px rgba(232,180,184,0.4);
+}
+
+.signature{
+font-size:16px;
+letter-spacing:3px;
+margin-top:35px;
+opacity:0.6;
+}
+
+.particles{
+position:fixed;
+inset:0;
+z-index:1;
+pointer-events:none;
+overflow:hidden;
+}
+
+.particle{
+position:absolute;
+animation:drift linear infinite;
+opacity:0;
+}
+
+@keyframes drift{
+0%{transform:translateY(110vh) rotate(0deg) scale(0.3);opacity:0;}
+20%{opacity:1;}
+100%{transform:translateY(-15vh) rotate(720deg) scale(1.2);opacity:0;}
+}
+
+.progress{
+position:fixed;
+top:0;
+left:0;
+height:3px;
+background:linear-gradient(90deg, var(--gold), var(--rose));
+z-index:2000;
+transition:width 0.5s ease;
+}
+
+.quote{
+font-style:italic;
+font-size:22px;
+color:rgba(255,255,255,0.7);
+margin:20px 0;
+}
+
+.list-item{
+font-size:18px;
+line-height:2.2;
+color:rgba(255,255,255,0.9);
+}
+
+@media(max-width:768px){
+.blackbox{inset:10px;border-radius:20px;}
+h1{font-size:30px;}
+.message{font-size:16px;line-height:1.8;}
+.emoji{font-size:50px;}
+.img-frame{width:150px;height:90px;}
+.lily-img{width:115px;height:75px;}
+.btn{padding:13px 25px;font-size:12px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<audio id="bgMusic" loop>
+<source src="song.mp3" type="audio/mp3">
+</audio>
+
+<div class="blackbox open">
+<div class="particles" id="particles"></div>
+
+<!-- PAGE 1: The Beginning -->
+<section class="page" id="page1">
+<div class="overlay"></div>
+<div class="content">
+<div class="emoji">🐻‍❄️</div>
+<h1>Polar Bear</h1>
+<p class="message">
+There's a reason I made this...<br>
+Something feels incomplete when you're not around 🥺
+</p>
+<div class="btn-group">
+<button class="btn" onclick="startExperience()">OPEN 💫</button>
+</div>
+</div>
+</section>
+
+<!-- PAGE 2: Like A Lily -->
+<section class="page hidden" id="page2">
+<div class="overlay"></div>
+<div class="content">
+<div class="emoji">🌸</div>
+<h1>Pure As Lily</h1>
+<p class="message">
+Just like a lily in the morning dew...<br>
+You are pure, you are beautiful,<br>
+You are everything ✨
+</p>
+<div class="gallery">
+<img class="img-frame lily-img" src="https://images.unsplash.com/photo-1522764724726-8c742aac27e6?q=80&w=400&auto=format&fit=crop">
+<img class="img-frame lily-img" src="https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?q=80&w=400&auto=format&fit=crop">
+</div>
+<div class="btn-group">
+<button class="btn" onclick="nextPage(2,3)">FOR YOU 💛</button>
+</div>
+</div>
+</section>
+
+<!-- PAGE 3: Why You Special -->
+<section class="page hidden" id="page3">
+<div class="overlay"></div>
+<div class="content">
+<div class="emoji">✨</div>
+<h1>Why You Special</h1>
+<p class="message">
+You are not like others...<br>
+You are different, you are rare,<br>
+You are one in a million 🌟
+</p>
+<p class="list-item">
+💫 Your smile lights up my world<br>
+💫 Your voice is my favorite sound<br>
+💫 Your heart is made of gold<br>
+💫 You are my forever person
+</p>
+<div class="btn-group">
+<button class="btn" onclick="nextPage(3,4)">I KNOW 💖</button>
+</div>
+</div>
+</section>
+
+<!-- PAGE 4: BEST DRIVER -->
+<section class="page hidden" id="page4">
+<div class="overlay"></div>
+<div class="content">
+<div class="emoji">🚗</div>
+<div class="gold-badge">⭐ Best Creta Driver ⭐</div>
+<h1>Your Car Awaits</h1>
+<p class="message" style="color:var(--gold);">
+The night sky calls me...<br>
+But what calls me more...<br>
+Is the way you handle the road 🌙
+</p>
+<img class="img-frame" src="https://images.unsplash.com/photo-1590362891991-f776e747a588?q=80&w=600&auto=format&fit=crop">
+<div class="btn-group">
+<button class="btn" onclick="nextPage(4,5)">DRIVE WITH ME 🌙</button>
+<button class="btn" onclick="nextPage(4,5)">YOU DRIVE 💪</button>
+</div>
+</div>
+</section>
+
+<!-- PAGE 5: Night Drive Vision -->
+<section class="page hidden" id="page5">
+<div class="overlay"></div>
+<div class="content">
+<div class="emoji">🌃</div>
+<h1>Imagine This</h1>
+<p class="message">
+Moonlight on your face...<br>
+Music playing softly...<br>
+My hand in yours...<br>
+Just us and the endless road 🚗💕
+</p>
+<div class="quote">
+"Our drive never ends,<br>
+Our conversations never stop,<br>
+Our connection never fades..."
+</div>
+<div class="btn-group">
+<button class="btn" onclick="nextPage(5,6)">CAN'T WAIT 🌟</button>
+</div>
+</div>
+</section>
+
+<!-- PAGE 6: Comfort -->
+<section class="page hidden" id="page6">
+<div class="overlay"></div>
+<div class="content">
+<div class="emoji">🧋</div>
+<h1>Treat Time</h1>
+<p class="message">
+What's my polar bear craving? 🥺<br>
+Let's make tonight special
+</p>
+<div class="btn-group">
+<button class="btn" onclick="nextPage(6,7)">🧋 Bubble Tea</button>
+<button class="btn" onclick="nextPage(6,7)">🍜 Noodles</button>
+<button class="btn" onclick="nextPage(6,7)">🍕 Pizza</button>
+</div>
+</div>
+</section>
+
+<!-- PAGE 7: Heart Message -->
+<section class="page hidden" id="page7">
+<div class="overlay"></div>
+<div class="content">
+<div class="emoji">❤️</div>
+<h1>From My Heart</h1>
+<p class="message">
+Every heartbeat reminds me of you...<br>
+Every breath I take<br>
+Is a prayer for you...<br>
+You're my answer to everything 💕
+</p>
+<div class="quote">
+"I don't need the world,<br>
+I just need you.<br>
+I don't need forever,<br>
+I just need now with you."
+</div>
+<div class="btn-group">
+<button class="btn" onclick="nextPage(7,8)">I FEEL IT 💗</button>
+</div>
+</div>
+</section>
+
+<!-- PAGE 8: Final -->
+<section class="page hidden" id="page8">
+<div class="overlay"></div>
+<div class="content">
+<div class="emoji">🧸</div>
+<h1>One Last Thing...</h1>
+<p class="final-text">
+"Without your voice,<br>
+The silence feels louder.<br>
+Without you,<br>
+Everything feels incomplete..." ❤️
+</p>
+<button class="btn" onclick="callMe()">
+📞 CALL NOW
+</button>
+<p class="signature">
+Your passenger seat is forever reserved 🚗💕
+</p>
+</div>
+</section>
+
+</div>
+</body>
+
+<script>
+let currentPage = 1;
+const totalPages = 8;
+
+function startExperience(){
+document.getElementById('bgMusic').play();
+nextPage(1,2);
+}
+
+function nextPage(current, next){
+currentPage = next;
+document.getElementById('page'+current).classList.add('hidden');
+document.getElementById('page'+next).classList.remove('hidden');
+updateProgress();
+}
+
+function callMe(){
+window.location.href = 'tel:+918288931872';
+}
+
+function updateProgress(){
+let percent = (currentPage / totalPages) * 100;
+document.getElementById('progress').style.width = percent + '%';
+}
+
+const particles = document.getElementById('particles');
+const items = ['❤️', '💕', '💖', '✨', '🌸', '🐻‍❄️', '🌙', '⭐', '💫'];
+
+for(let i = 0; i < 50; i++){
+let p = document.createElement('div');
+p.className = 'particle';
+p.innerHTML = items[Math.floor(Math.random() * items.length)];
+p.style.left = Math.random() * 100 + 'vw';
+p.style.animationDuration = (Math.random() * 10 + 7) + 's';
+p.style.animationDelay = (Math.random() * 8) + 's';
+p.style.fontSize = (Math.random() * 20 + 10) + 'px';
+particles.appendChild(p);
+}
+
+setTimeout(() => updateProgress(), 500);
+</script>
+
+</body>
+</html>
